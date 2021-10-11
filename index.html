@@ -40,13 +40,11 @@
     playerManager.addEventListener(
         cast.framework.events.EventType.ERROR,
         event => {
-            
-            let message = event.toString();
-            
-            console.log("player error:");
-            console.log(message);
 
-            context.sendCustomMessage(channel, undefined, message);
+            console.log("player error:");
+            console.log(event);
+
+            //context.sendCustomMessage(channel, undefined, message);
         }
     );
 
@@ -54,13 +52,10 @@
     playerManager.addEventListener(
         cast.framework.events.EventType.ALL,
         event => {
-            
-            let message = event.toString();
-            
-            console.log("player debug:");
-            console.log(message);
 
-            //context.sendCustomMessage(channel, undefined, message);
+            console.log("player debug:");
+            console.log(event);
+            
         }
     );
 
