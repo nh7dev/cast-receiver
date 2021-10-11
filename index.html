@@ -19,7 +19,7 @@
 <cast-media-player></cast-media-player>
 
 <script>
-    console.log("started 1.0");
+    console.log("started 1.1");
 
     const context = cast.framework.CastReceiverContext.getInstance();
     const playerManager = context.getPlayerManager();
@@ -40,12 +40,27 @@
     playerManager.addEventListener(
         cast.framework.events.EventType.ERROR,
         event => {
-
-            let message = "player error: " + event.detailedErrorCode;
+            
+            let message = event.toString();
+            
+            console.log("player error:");
             console.log(message);
-            console.log(event);
 
             context.sendCustomMessage(channel, undefined, message);
+        }
+    );
+
+    //player debug listener
+    playerManager.addEventListener(
+        cast.framework.events.EventType.ALL,
+        event => {
+            
+            let message = event.toString();
+            
+            console.log("player debug:");
+            console.log(message);
+
+            //context.sendCustomMessage(channel, undefined, message);
         }
     );
 
