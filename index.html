@@ -26,7 +26,7 @@
 
 <!-- https://developers.google.com/cast/docs/reference/web_receiver -->
 <script>
-    console.log("started 4.0");
+    console.log("started 5.0");
 
     //=====[context]=====
 
@@ -83,7 +83,12 @@
         }
     );
 
-    context.start({});
+    const pc = new cast.framework.PlaybackConfig();
+    pc.manifestRequestHandler = requestInfo => {
+        requestInfo.headers = {Referer: "http://example.com"}
+    };
+
+    context.start({playbackConfig: pc});
     console.log("ready")
 
     function setPlaybackConfig(referer) {
