@@ -26,7 +26,7 @@
 
 <!-- https://developers.google.com/cast/docs/reference/web_receiver -->
 <script>
-    console.log("started 3.0");
+    console.log("started 4.0");
 
     //=====[context]=====
 
@@ -74,7 +74,7 @@
     */
 
     //player video interceptor
-    playerManager.setMessageInterceptor(cast.framework.messages.MessageType.LOAD, requestData => {
+    playerManager.setMessageInterceptor(cast.framework.messages.MessageType.PRELOAD, requestData => {
             console.log("loaded " + requestData.media.contentId + " with type " + requestData.media.contentType);
             console.log(requestData.media);
             console.log(requestData.customData);
