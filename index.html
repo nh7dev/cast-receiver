@@ -26,7 +26,7 @@
 
 <!-- https://developers.google.com/cast/docs/reference/web_receiver -->
 <script>
-    console.log("started 2.0");
+    console.log("started 3.0");
 
     //=====[context]=====
 
@@ -64,13 +64,6 @@
         }
     );
 
-    const playbackConfig = new cast.framework.PlaybackConfig();
-    playbackConfig.manifestRequestHandler = requestInfo => {
-        requestInfo.headers = {Referer: "test.com"}
-    };
-
-    playerManager.setPlaybackConfig(playbackConfig);
-
     /*
     //player debug listener
     playerManager.addEventListener(cast.framework.events.EventType.ALL, event => {
@@ -80,18 +73,27 @@
     );
     */
 
-    /*
     //player video interceptor
     playerManager.setMessageInterceptor(cast.framework.messages.MessageType.LOAD, requestData => {
             console.log("loaded " + requestData.media.contentId + " with type " + requestData.media.contentType);
             console.log(requestData.media);
+            console.log(requestData.customData);
+            setPlaybackConfig("https://test.com")
             return requestData;
         }
     );
-    */
 
     context.start({});
     console.log("ready")
+
+    function setPlaybackConfig(referer) {
+        const playbackConfig = new cast.framework.PlaybackConfig();
+        playbackConfig.manifestRequestHandler = requestInfo => {
+            requestInfo.headers = {Referer: referer}
+        };
+        playerManager.setPlaybackConfig(playbackConfig);
+        console.log("playbackconfig set: " + playbackConfig)
+    }
 </script>
 
 </body>
