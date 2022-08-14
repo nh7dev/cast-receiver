@@ -2,14 +2,20 @@
 <html lang="en">
 
 <head>
-    <script type="text/javascript"
-            src="//www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js">
-    </script>
+    <script src="//www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js"></script>
 
+    <!-- https://developers.google.com/cast/docs/web_receiver/customize_ui -->
     <style>
         cast-media-player {
             --progress-color: rgb(120, 0, 46);
-            --splash-image: url('loader.svg');
+
+            --splash-image: url("loader.svg");
+
+            --slideshow-image-1: url("loaders/audio.svg");
+            --slideshow-image-2: url("loaders/ball-triangle.svg");
+            --slideshow-image-3: url("loaders/bars.svg");
+            --slideshow-image-4: url("loaders/circles.svg");
+            --slideshow-image-5: url("loaders/grid.svg");
         }
     </style>
 </head>
@@ -18,93 +24,74 @@
 
 <cast-media-player></cast-media-player>
 
+<!-- https://developers.google.com/cast/docs/reference/web_receiver -->
 <script>
     console.log("started 1.0");
 
+    //=====[context]=====
+
     const context = cast.framework.CastReceiverContext.getInstance();
-    const playerManager = context.getPlayerManager();
 
     console.log(context.getDeviceCapabilities());
 
     //system error listener
-    context.addEventListener(
-        cast.framework.system.EventType.ERROR,
-        event => {
-
+    context.addEventListener(cast.framework.system.EventType.ERROR, event => {
             console.log("system error:");
             console.log(event);
         }
     );
 
-    //player error listener
-    playerManager.addEventListener(
-        cast.framework.events.EventType.ERROR,
-        event => {
-
-            console.log("player error:");
-            console.log(event);
-
-            //context.sendCustomMessage(channel, undefined, message);
-        }
-    );
-
     /*
-    //player debug listener
-    playerManager.addEventListener(
-        cast.framework.events.EventType.ALL,
-        event => {
-
-            console.log("player debug:");
-            console.log(event);
-            
+    //message channel
+    const channel = "urn:x-cast:streamcast";
+    context.addCustomMessageListener(channel, event => {
+            console.log("received custom message: " + event);
+            let data = event.data;
+            let message = data.message;
+            console.log("received message: " + message);
         }
     );
     */
 
-    //message channel
-    const channel = "urn:x-cast:streamcast";
-    context.addCustomMessageListener(
-        channel,
-        event => {
+    //=====[player]=====
 
-            console.log("received custom message: " + event);
+    const playerManager = context.getPlayerManager();
 
-            let data = event.data;
-            let message = data.message;
-
-            console.log("received message: " + message);
+    //player error listener
+    playerManager.addEventListener(cast.framework.events.EventType.ERROR, event => {
+            console.log("player error:");
+            console.log(event);
         }
     );
 
-    playerManager.setMessageInterceptor(
-        cast.framework.messages.MessageType.LOAD,
-        requestData => {
+    const playbackConfig = new cast.framework.PlaybackConfig();
+    playbackConfig.manifestRequestHandler = requestInfo => {
+        requestInfo.headers["Referer"] = "test.com"
+    };
 
+    playerManager.setPlaybackConfig(playbackConfig);
+
+    /*
+    //player debug listener
+    playerManager.addEventListener(cast.framework.events.EventType.ALL, event => {
+            console.log("player debug:");
+            console.log(event);
+        }
+    );
+    */
+
+    /*
+    //player video interceptor
+    playerManager.setMessageInterceptor(cast.framework.messages.MessageType.LOAD, requestData => {
             console.log("loaded " + requestData.media.contentId + " with type " + requestData.media.contentType);
             console.log(requestData.media);
-
             return requestData;
         }
     );
+    */
 
-    context.start(/*{playbackConfig: getPlaybackConfig()}*/);
-
-    function getPlaybackConfig() {
-        const playbackConfig = new cast.framework.PlaybackConfig();
-
-        //playbackConfig.autoPauseDuration = 2;
-        playbackConfig.autoResumeDuration = 5;
-        //playbackConfig.autoResumeNumberOfSegments = 1;
-        //playbackConfig.segmentRequestRetryLimit = 0;
-
-        /*
-        playbackConfig.manifestRequestHandler = requestInfo => {
-            requestInfo.withCredentials = true;
-        };
-        */
-
-        return playbackConfig;
-    }
+    context.start({});
+    console.log("ready")
 </script>
 
 </body>
