@@ -78,26 +78,21 @@
             console.log("loaded " + requestData.media.contentId + " with type " + requestData.media.contentType);
             console.log(requestData.media);
             console.log(requestData.customData);
-            setPlaybackConfig("https://test.com")
+            //playerManager.setPlaybackConfig(getPlaybackConfig());
             return requestData;
         }
     );
 
-    const pc = new cast.framework.PlaybackConfig();
-    pc.manifestRequestHandler = requestInfo => {
-        requestInfo.headers = {Referer: "http://example.com"}
-    };
-
-    context.start({playbackConfig: pc});
+    context.start({playbackConfig: getPlaybackConfig()});
     console.log("ready")
 
-    function setPlaybackConfig(referer) {
+    function getPlaybackConfig() {
         const playbackConfig = new cast.framework.PlaybackConfig();
         playbackConfig.manifestRequestHandler = requestInfo => {
-            requestInfo.headers = {Referer: referer}
+            requestInfo.withCredentials = true
+            //requestInfo.headers = {Referer: referer}
         };
-        playerManager.setPlaybackConfig(playbackConfig);
-        console.log("playbackconfig set: " + playbackConfig)
+        return playbackConfig
     }
 </script>
 
