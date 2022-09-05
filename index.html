@@ -26,7 +26,7 @@
 
 <!-- https://developers.google.com/cast/docs/reference/web_receiver -->
 <script>
-    console.log("started 5.0");
+    console.log("started 6.0");
 
     //=====[context]=====
 
@@ -88,10 +88,11 @@
 
     function getPlaybackConfig() {
         const playbackConfig = new cast.framework.PlaybackConfig();
+        /*
         playbackConfig.manifestRequestHandler = requestInfo => {
             requestInfo.withCredentials = true
             //requestInfo.headers = {Referer: referer}
-        };
+        };*/
         return playbackConfig
     }
 </script>
