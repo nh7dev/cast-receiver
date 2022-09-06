@@ -2,22 +2,17 @@
 <html lang="en">
 
 <head>
+
     <script src="//www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js"></script>
 
     <!-- https://developers.google.com/cast/docs/web_receiver/customize_ui -->
     <style>
         cast-media-player {
             --progress-color: rgb(120, 0, 46);
-
-            --splash-image: url("loader.svg");
-
-            --slideshow-image-1: url("loaders/audio.svg");
-            --slideshow-image-2: url("loaders/ball-triangle.svg");
-            --slideshow-image-3: url("loaders/bars.svg");
-            --slideshow-image-4: url("loaders/circles.svg");
-            --slideshow-image-5: url("loaders/grid.svg");
+            --splash-image: url("loaders/bars.svg");
         }
     </style>
+
 </head>
 
 <body>
@@ -26,7 +21,8 @@
 
 <!-- https://developers.google.com/cast/docs/reference/web_receiver -->
 <script>
-    console.log("started 6.0");
+
+    console.log("started 7.0");
 
     //=====[context]=====
 
@@ -95,6 +91,7 @@
         };*/
         return playbackConfig
     }
+
 </script>
 
 </body>
