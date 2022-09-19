@@ -9,7 +9,7 @@
     <style>
         cast-media-player {
             --progress-color: rgb(120, 0, 46);
-            --splash-image: url("loaders/spinning-circles.svg");
+            --splash-image: url("loaders/ball-triangle.svg");
         }
     </style>
 
@@ -22,7 +22,7 @@
 <!-- https://developers.google.com/cast/docs/reference/web_receiver -->
 <script>
 
-    console.log("started 1.0");
+    console.log("started 2.0");
 
     //=====[context]=====
 
@@ -70,7 +70,7 @@
     */
 
     //player video interceptor
-    playerManager.setMessageInterceptor(cast.framework.messages.MessageType.PRELOAD, requestData => {
+    playerManager.setMessageInterceptor(cast.framework.messages.MessageType.LOAD, requestData => {
             console.log("loaded " + requestData.media.contentId + " with type " + requestData.media.contentType);
             console.log("requestData.media: " + requestData.media);
             console.log("requestData.customData" + requestData.customData);
