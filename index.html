@@ -22,7 +22,7 @@
 <!-- https://developers.google.com/cast/docs/reference/web_receiver -->
 <script>
 
-    console.log("started 5.0");
+    console.log("started 6.0");
 
     //=====[context]=====
 
@@ -73,20 +73,20 @@
     playerManager.setMessageInterceptor(cast.framework.messages.MessageType.LOAD, requestData => {
             console.log(requestData.media);
             console.log(requestData.customData);
-            playerManager.setPlaybackConfig(getPlaybackConfig());
+            const castStreamInfoHeader = requestData.customData;
+            playerManager.setPlaybackConfig(getPlaybackConfig(castStreamInfoHeader));
             return requestData;
         }
     );
 
-    context.start({playbackConfig: getPlaybackConfig()});
+    context.start({});//playbackConfig: getPlaybackConfig()
     console.log("ready")
 
-    function getPlaybackConfig() {
+    function getPlaybackConfig(headers) {
         const playbackConfig = new cast.framework.PlaybackConfig();
         playbackConfig.manifestRequestHandler = requestInfo => {
             //requestInfo.withCredentials = true;
-            requestInfo.headers = {};
-            requestInfo.headers['Test'] = 'test123';
+            requestInfo.headers = headers;
         };
         return playbackConfig
     }
