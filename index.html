@@ -22,7 +22,7 @@
 <!-- https://developers.google.com/cast/docs/reference/web_receiver -->
 <script>
 
-    console.log("started 4.0");
+    console.log("started 5.0");
 
     //=====[context]=====
 
@@ -78,14 +78,15 @@
         }
     );
 
-    context.start({}); //{playbackConfig: getPlaybackConfig()}
+    context.start({playbackConfig: getPlaybackConfig()});
     console.log("ready")
 
     function getPlaybackConfig() {
         const playbackConfig = new cast.framework.PlaybackConfig();
         playbackConfig.manifestRequestHandler = requestInfo => {
             //requestInfo.withCredentials = true;
-            requestInfo.headers = {"Test": "thisisatest"};
+            requestInfo.headers = {};
+            requestInfo.headers['Test'] = 'test123';
         };
         return playbackConfig
     }
