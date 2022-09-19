@@ -22,7 +22,7 @@
 <!-- https://developers.google.com/cast/docs/reference/web_receiver -->
 <script>
 
-    console.log("started 2.0");
+    console.log("started 3.0");
 
     //=====[context]=====
 
@@ -71,22 +71,22 @@
 
     //player video interceptor
     playerManager.setMessageInterceptor(cast.framework.messages.MessageType.LOAD, requestData => {
-            console.log("loaded " + requestData.media.contentId + " with type " + requestData.media.contentType);
-            console.log("requestData.media: " + requestData.media);
-            console.log("requestData.customData" + requestData.customData);
-            //playerManager.setPlaybackConfig(getPlaybackConfig());
+            console.log("loaded " + requestData.media.contentId);
+            console.log(requestData.media);
+            console.log(requestData.customData);
+            playerManager.setPlaybackConfig(getPlaybackConfig());
             return requestData;
         }
     );
 
-    context.start({playbackConfig: getPlaybackConfig()});
+    context.start({}); //{playbackConfig: getPlaybackConfig()}
     console.log("ready")
 
     function getPlaybackConfig() {
         const playbackConfig = new cast.framework.PlaybackConfig();
         playbackConfig.manifestRequestHandler = requestInfo => {
-            //requestInfo.withCredentials = true
-            requestInfo.headers = {Test: "This is a test"}
+            //requestInfo.withCredentials = true;
+            requestInfo.headers = {Test: "This is a test"};
         };
         return playbackConfig
     }
