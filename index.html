@@ -22,13 +22,13 @@
 <!-- https://developers.google.com/cast/docs/reference/web_receiver -->
 <script>
 
-    console.log("started 6.0");
+    console.log("started 1.0");
 
     //=====[context]=====
 
     const context = cast.framework.CastReceiverContext.getInstance();
 
-    console.log(context.getDeviceCapabilities());
+    //console.log(context.getDeviceCapabilities());
 
     //system error listener
     context.addEventListener(cast.framework.system.EventType.ERROR, event => {
@@ -74,12 +74,13 @@
             console.log(requestData.media);
             console.log(requestData.customData);
             const castStreamInfoHeader = requestData.customData;
-            playerManager.setPlaybackConfig(getPlaybackConfig(castStreamInfoHeader));
+            const playbackConfig = getPlaybackConfig(castStreamInfoHeader);
+            playerManager.setPlaybackConfig(playbackConfig);
             return requestData;
         }
     );
 
-    context.start({});//playbackConfig: getPlaybackConfig()
+    context.start({});
     console.log("ready")
 
     function getPlaybackConfig(headers) {
