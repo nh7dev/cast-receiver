@@ -8,10 +8,10 @@
     <!-- https://developers.google.com/cast/docs/web_receiver/customize_ui -->
     <style>
         cast-media-player {
-            --progress-color: rgb(120, 0, 46);
-            --background-image: linear-gradient(gold, darkgoldenrod, black);
-            --logo-image: url("loaders/bars.svg");
-            --splash-image: url("loaders/ball-triangle.svg");
+            --progress-color: gold;
+            --background-image: linear-gradient(black, gray, black);
+            --splash-image: url("svg/splash.svg");
+            --logo-image: url("svg/logo.svg");
         }
     </style>
 
@@ -24,7 +24,7 @@
 <!-- https://developers.google.com/cast/docs/reference/web_receiver -->
 <script>
 
-    console.log("started 2.0");
+    console.log("started 1.0");
 
     //=====[context]=====
 
@@ -75,7 +75,7 @@
     playerManager.setMessageInterceptor(cast.framework.messages.MessageType.LOAD, requestData => {
             console.log(requestData.media);
             //console.log(requestData.customData);
-            playerManager.setPlaybackConfig(getPlaybackConfig());
+            //playerManager.setPlaybackConfig(getPlaybackConfig());
             return requestData;
         }
     );
