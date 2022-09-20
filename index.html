@@ -90,7 +90,7 @@
         const playbackConfig = new cast.framework.PlaybackConfig();
         playbackConfig.manifestRequestHandler = requestInfo => {
             //requestInfo.headers = {};
-            //requestInfo.timeoutInterval = 5000;
+            requestInfo.timeoutInterval = 5000;
         };
         return playbackConfig
     }
