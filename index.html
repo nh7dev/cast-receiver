@@ -9,6 +9,8 @@
     <style>
         cast-media-player {
             --progress-color: rgb(120, 0, 46);
+            --background-image: linear-gradient(gold, darkgoldenrod, black);
+            --logo-image: url("loaders/bars.svg");
             --splash-image: url("loaders/ball-triangle.svg");
         }
     </style>
@@ -22,7 +24,7 @@
 <!-- https://developers.google.com/cast/docs/reference/web_receiver -->
 <script>
 
-    console.log("started 1.0");
+    console.log("started 2.0");
 
     //=====[context]=====
 
@@ -72,11 +74,8 @@
     //player video interceptor
     playerManager.setMessageInterceptor(cast.framework.messages.MessageType.LOAD, requestData => {
             console.log(requestData.media);
-            console.log(requestData.customData);
-            /*
-            const castStreamInfoHeader = requestData.customData;
-            const playbackConfig = getPlaybackConfig(castStreamInfoHeader);
-            playerManager.setPlaybackConfig(playbackConfig);*/
+            //console.log(requestData.customData);
+            playerManager.setPlaybackConfig(getPlaybackConfig());
             return requestData;
         }
     );
@@ -84,11 +83,11 @@
     context.start({});
     console.log("ready")
 
-    function getPlaybackConfig(headers) {
+    function getPlaybackConfig() {
         const playbackConfig = new cast.framework.PlaybackConfig();
         playbackConfig.manifestRequestHandler = requestInfo => {
-            //requestInfo.withCredentials = true;
-            requestInfo.headers = headers;
+            //requestInfo.headers = {};
+            requestInfo.timeoutInterval = 5000;
         };
         return playbackConfig
     }
