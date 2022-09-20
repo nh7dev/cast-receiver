@@ -27,7 +27,7 @@
 <!-- https://developers.google.com/cast/docs/reference/web_receiver -->
 <script>
 
-    console.log("started 1.0");
+    console.log("started 2.0");
 
     //=====[context]=====
 
@@ -78,7 +78,7 @@
     playerManager.setMessageInterceptor(cast.framework.messages.MessageType.LOAD, requestData => {
             console.log(requestData.media);
             //console.log(requestData.customData);
-            //playerManager.setPlaybackConfig(getPlaybackConfig());
+            playerManager.setPlaybackConfig(getPlaybackConfig());
             return requestData;
         }
     );
