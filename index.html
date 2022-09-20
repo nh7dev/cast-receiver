@@ -8,9 +8,12 @@
     <!-- https://developers.google.com/cast/docs/web_receiver/customize_ui -->
     <style>
         cast-media-player {
-            --progress-color: gold;
-            --background-image: linear-gradient(black, gray, black);
+            --progress-color: #FFFFFF;
+
+            --background-image: radial-gradient(#424242, #000000);
+
             --splash-image: url("svg/splash.svg");
+
             --logo-image: url("svg/logo.svg");
         }
     </style>
@@ -87,7 +90,7 @@
         const playbackConfig = new cast.framework.PlaybackConfig();
         playbackConfig.manifestRequestHandler = requestInfo => {
             //requestInfo.headers = {};
-            requestInfo.timeoutInterval = 5000;
+            //requestInfo.timeoutInterval = 5000;
         };
         return playbackConfig
     }
