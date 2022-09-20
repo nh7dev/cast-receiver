@@ -73,9 +73,10 @@
     playerManager.setMessageInterceptor(cast.framework.messages.MessageType.LOAD, requestData => {
             console.log(requestData.media);
             console.log(requestData.customData);
+            /*
             const castStreamInfoHeader = requestData.customData;
             const playbackConfig = getPlaybackConfig(castStreamInfoHeader);
-            playerManager.setPlaybackConfig(playbackConfig);
+            playerManager.setPlaybackConfig(playbackConfig);*/
             return requestData;
         }
     );
