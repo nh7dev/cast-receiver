@@ -88,6 +88,7 @@
     const options = new cast.framework.CastReceiverOptions();
     options.maxInactivity = 6;
     options.playbackConfig = new cast.framework.PlaybackConfig()
+    options.playbackConfig.segmentRequestRetryLimit = 7;
     options.playbackConfig.manifestRequestHandler = requestInfo => {
         //requestInfo.headers = {};
         requestInfo.timeoutInterval = 2000;
