@@ -27,7 +27,7 @@
 <!-- https://developers.google.com/cast/docs/reference/web_receiver -->
 <script>
 
-    console.log("started 2.0");
+    console.log("started 3.0");
 
     //=====[context]=====
 
@@ -83,7 +83,7 @@
         }
     );
 
-    context.setInactivityTimeout(4);
+    context.setInactivityTimeout(333);
 
     const options = new cast.framework.CastReceiverOptions();
     options.maxInactivity = 6;
